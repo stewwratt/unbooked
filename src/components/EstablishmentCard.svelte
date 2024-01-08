@@ -112,20 +112,35 @@
 
   </style>
   
+  {#if establishment}
   <div class="establishment-card">
-    <img class="establishment-image" src={establishment.imageUrl} alt={establishment.name} />
-    <h2>{establishment.name}</h2>
+    <img 
+      class="establishment-image" 
+      src={establishment.imageUrl || '/default-image.jpg'} 
+      alt={establishment.name || 'Establishment'} 
+    />
+    <h2>{establishment.name || 'Unknown Establishment'}</h2>
+
     <div class="social-media-links">
-      <!-- Add checks for existence of social media links if needed -->
-      <a href={establishment.socialMedia.facebook}>Facebook</a>
-      <a href={establishment.socialMedia.twitter}>Twitter</a>
-      <a href={establishment.socialMedia.instagram}>Instagram</a>
+      {#if establishment.socialMedia && establishment.socialMedia.facebook}
+        <a href={establishment.socialMedia.facebook}>Facebook</a>
+      {/if}
+      {#if establishment.socialMedia && establishment.socialMedia.twitter}
+        <a href={establishment.socialMedia.twitter}>Twitter</a>
+      {/if}
+      {#if establishment.socialMedia && establishment.socialMedia.instagram}
+        <a href={establishment.socialMedia.instagram}>Instagram</a>
+      {/if}
     </div>
-    <div>{establishment.location}</div>
+
+    <div>{establishment.location || 'No location specified'}</div>
+
     <div class="star-rating">
-      <!-- Component or logic to display star rating -->
-      {establishment.rating} stars
+      {establishment.rating || 0} stars
     </div>
+
     <button class="select-button" on:click={selectEstablishment}>Select</button>
   </div>
-  
+{:else}
+  <p>Establishment data is not available.</p>
+{/if}

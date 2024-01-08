@@ -7,9 +7,6 @@
   </script>
   
   <style>
-    * {
-      font-family: "Red Hat Display", sans-serif;
-    }
     
     .service-card {
       display: flex;
